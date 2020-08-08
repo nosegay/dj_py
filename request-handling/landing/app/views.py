@@ -41,8 +41,16 @@ def stats(request):
     # Чтобы отличить с какой версии лендинга был переход
     # проверяйте GET параметр marker который может принимать значения test и original
     # Для вывода результат передайте в следующем формате:
-    test_land = counter_click['test'] / counter_show['test']
-    original_land = counter_click['original'] / counter_show['original']
+    if counter_show['test'] != 0:
+        test_land = counter_click['test'] / counter_show['test']
+    else:
+        test_land = 0
+
+    if counter_show['original'] != 0:
+        original_land = counter_click['original'] / counter_show['original']
+    else:
+        original_land = 0
+
     return render_to_response('stats.html', context={
         'test_conversion': test_land,
         'original_conversion': original_land,
