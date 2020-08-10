@@ -41,6 +41,7 @@ def stats(request):
     # Чтобы отличить с какой версии лендинга был переход
     # проверяйте GET параметр marker который может принимать значения test и original
     # Для вывода результат передайте в следующем формате:
+
     if counter_show['test'] != 0:
         test_land = counter_click['test'] / counter_show['test']
     else:
