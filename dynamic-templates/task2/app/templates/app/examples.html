@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+
+{% block Example%}
+<li  class="active"><a href="{% url 'examples' %}">Примеры</a></li>
+{% endblock %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col s12">
+      <h1 class="col s12">Каталог компьютеров Apple</h1>
+      {% for item in items %}
+        {% include "app/example_card.html" with item=item %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
