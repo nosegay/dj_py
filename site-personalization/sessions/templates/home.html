@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Угадай число{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1>Игра "Угадай число"</h1>
+            {% if status == 'init' %}
+                <form method="post" action="{% url 'game' %}">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Начать игру">
+                </form>
+            {% elif status == 'play' %}
+                <form method="post" action="{% url 'game' %}">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Проверить число">
+                </form>
+            {% elif status == 'waiting' %}
+                <H3>Загаданное число {{ number }}</H3>
+                <p>Другие игроки будут пытаться отгадать его</p>
+                {% if attempts is not None %}
+                    <H3>Ваше число угадали с {{ attempts }} попытки </H3>
+                {% endif %}
+            {% elif status == 'lose' or status == 'win' %}
+                <p>Текущая игра завершена, обновите страницу для участия в следующей</p>
+            {% endif %}
+            {% if comment is not None %}
+                <p> {{ comment }} </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
